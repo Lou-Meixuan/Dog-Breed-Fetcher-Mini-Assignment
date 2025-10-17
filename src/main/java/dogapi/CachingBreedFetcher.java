@@ -17,15 +17,12 @@ public class CachingBreedFetcher implements BreedFetcher {
     BreedFetcher fetcher;
     Map<String, List<String>> cache = new HashMap<>();
 
-    public CachingBreedFetcher(BreedFetcher fetcher) {
-        if (fetcher == null) {
-            throw new BreedNotFoundException("fetcher must not be null");
-        }
+    public CachingBreedFetcher(BreedFetcher fetcher){
         this.fetcher = fetcher;
     }
 
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException{
         if (cache.containsKey(breed)) {
             return new ArrayList<>(cache.get(breed));
         }
